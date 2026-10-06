@@ -1,0 +1,12 @@
+services:
+  kiln:
+    build: .
+    container_name: ceramic-kiln
+    ports:
+      - "8000:8000"
+    volumes:
+      - kiln-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  kiln-data:

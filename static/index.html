@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陶瓷合窑装载确认台</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>陶瓷合窑装载确认台</h1>
+    <div id="msg" class="msg" style="display:none"></div>
+  </header>
+
+  <main>
+    <!-- 批次登记 -->
+    <section class="panel" id="panel-batches">
+      <h2>① 批次登记</h2>
+      <form id="batch-form">
+        <div class="form-row">
+          <label>批次编号<input id="b-no" required placeholder="如 B2026-001"></label>
+        </div>
+        <div class="form-row two">
+          <label>峰温下限 ℃<input id="b-peak-min" type="number" step="any" required placeholder="1200"></label>
+          <label>峰温上限 ℃<input id="b-peak-max" type="number" step="any" required placeholder="1280"></label>
+        </div>
+        <div class="form-row two">
+          <label>保温下限 分钟<input id="b-soak-min" type="number" step="1" required placeholder="30"></label>
+          <label>保温上限 分钟<input id="b-soak-max" type="number" step="1" required placeholder="60"></label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="batch-submit">登记批次</button>
+          <button type="button" id="batch-cancel" class="ghost" style="display:none">取消修改</button>
+        </div>
+      </form>
+      <table class="data-table" id="batch-table">
+        <thead>
+          <tr><th>编号</th><th>峰温区间 ℃</th><th>保温区间 分</th><th>版本</th><th>状态</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- 装窑草案 -->
+    <section class="panel" id="panel-kiln">
+      <h2>② 装窑草案</h2>
+      <div class="kiln-bar">
+        <label>选择窑
+          <select id="kiln-select"></select>
+        </label>
+        <form id="kiln-form" class="inline-form">
+          <input id="k-code" placeholder="新窑编号" required>
+          <input id="k-count" type="number" min="1" max="64" placeholder="窑位数" required>
+          <button type="submit" class="ghost">添加窑</button>
+        </form>
+      </div>
+      <div id="board" class="board"></div>
+
+      <div class="preview-box" id="preview-box">
+        <div class="preview-head">
+          <h3>预览</h3>
+          <button id="btn-preview" class="ghost">刷新预览</button>
+        </div>
+        <div id="preview-body"><p class="hint">把批次放入窑位后，点击「刷新预览」查看共同工艺区间。</p></div>
+        <button id="btn-confirm" class="confirm" disabled>确认装窑</button>
+      </div>
+    </section>
+
+    <!-- 已确认窑次 -->
+    <section class="panel" id="panel-loads">
+      <h2>③ 已确认窑次（不可变快照）</h2>
+      <div id="load-list"></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
